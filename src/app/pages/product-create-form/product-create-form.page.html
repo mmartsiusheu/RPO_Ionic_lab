@@ -1,0 +1,42 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button icon="chevron-back-outline"></ion-back-button>
+        </ion-buttons>
+        <ion-title>Create product</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <form [formGroup]="productForm">
+        <ion-item>
+            <ion-label position="floating">Product name</ion-label>
+            <ion-input formControlName="productName" type="text"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label position="floating">Product price</ion-label>
+            <ion-input formControlName="productPrice" type="number"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label position="floating">Product vendor</ion-label>
+            <ion-input formControlName="productVendor"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label position="floating">Vendor code</ion-label>
+            <ion-input formControlName="vendorCode"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label position="floating">Category id</ion-label>
+            <ion-input formControlName="categoryId" type="number"></ion-input>
+        </ion-item>
+
+        <ion-button class="ion-float-right ion-margin-top ion-margin-end"
+                    routerLink="/products"
+                    routerDirection="back">Cancel
+        </ion-button>
+        <ion-button class="ion-float-right ion-margin-top ion-margin-end"
+                    [disabled]="!productForm.valid"
+                    (click)="actionOnConfirm()">Create
+        </ion-button>
+    </form>
+</ion-content>

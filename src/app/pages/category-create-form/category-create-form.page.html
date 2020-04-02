@@ -1,0 +1,30 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button icon="chevron-back-outline"></ion-back-button>
+        </ion-buttons>
+        <ion-title>Create category</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <form [formGroup]="categoryForm">
+        <ion-item>
+            <ion-label position="floating">Category Name</ion-label>
+            <ion-input formControlName="categoryName" type="text"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label position="floating">Parent Id</ion-label>
+            <ion-input formControlName="parentId" type="number"></ion-input>
+        </ion-item>
+
+        <ion-button class="ion-float-right ion-margin-top ion-margin-end"
+                    routerLink="/categories"
+                    routerDirection="back">Cancel
+        </ion-button>
+        <ion-button class="ion-float-right ion-margin-top ion-margin-end"
+                    [disabled]="!categoryForm.valid"
+                    (click)="actionOnConfirm()">Create
+        </ion-button>
+    </form>
+</ion-content>

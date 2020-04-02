@@ -1,0 +1,35 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button icon="chevron-back-outline"></ion-back-button>
+        </ion-buttons>
+        <ion-title>Category details</ion-title>
+        <ion-buttons slot="end">
+            <ion-button>
+                <ion-icon name="build"></ion-icon>
+            </ion-button>
+            <ion-button (click)="showDeleteDialog()">
+                <ion-icon name="trash"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-list>
+        <ion-item>
+            <ion-label>Category Id</ion-label>
+            <ion-label class="ion-text-center ion-text-wrap" slot="end">{{category?.id}}</ion-label>
+        </ion-item>
+
+        <ion-item>
+            <ion-label>Category Name</ion-label>
+            <ion-label class="ion-text-center ion-text-wrap" slot="end">{{category?.categoryName}}</ion-label>
+        </ion-item>
+
+        <ion-item>
+            <ion-label>Parent Id</ion-label>
+            <ion-label class="ion-text-center ion-text-wrap" slot="end">{{category?.parentId}}</ion-label>
+        </ion-item>
+    </ion-list>
+</ion-content>

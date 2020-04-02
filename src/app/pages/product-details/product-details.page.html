@@ -1,0 +1,52 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button icon="chevron-back-outline"></ion-back-button>
+        </ion-buttons>
+        <ion-title>Product details</ion-title>
+        <ion-buttons slot="end">
+            <ion-button>
+                <ion-icon name="build"></ion-icon>
+            </ion-button>
+            <ion-button>
+                <ion-icon name="trash"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-content>
+        <ion-list>
+            <ion-item>
+                <ion-label>Product Id</ion-label>
+                <ion-label class="ion-text-center ion-text-wrap" slot="end">{{product?.id}}</ion-label>
+            </ion-item>
+
+            <ion-item>
+                <ion-label>Product name</ion-label>
+                <ion-label class="ion-text-center ion-text-wrap" slot="end">{{product?.productName}}</ion-label>
+            </ion-item>
+
+            <ion-item>
+                <ion-label>Product price</ion-label>
+                <ion-label class="ion-text-center ion-text-wrap" slot="end">{{product?.productPrice}}</ion-label>
+            </ion-item>
+
+            <ion-item>
+                <ion-label>Product vendor</ion-label>
+                <ion-label class="ion-text-center ion-text-wrap" slot="end">{{product?.vendor}}</ion-label>
+            </ion-item>
+
+            <ion-item>
+                <ion-label>Vendor code</ion-label>
+                <ion-label class="ion-text-center ion-text-wrap" slot="end">{{product?.vendorCode}}</ion-label>
+            </ion-item>
+
+            <ion-item>
+                <ion-label>Category Id</ion-label>
+                <ion-label class="ion-text-center ion-text-wrap" slot="end">{{product?.categoryId}}</ion-label>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-content>
