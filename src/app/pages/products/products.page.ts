@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Observable, Subscription} from 'rxjs';
 import {Product} from '../../model/product';
 import {ProductService} from '../../services/product.service';
@@ -10,7 +10,7 @@ import {environment} from '../../../environments/environment';
     templateUrl: './products.page.html',
     styleUrls: ['./products.page.scss'],
 })
-export class ProductsPage implements OnInit {
+export class ProductsPage implements OnInit, OnDestroy {
 
     private products: Product[];
     private subscription: Subscription;
@@ -23,15 +23,11 @@ export class ProductsPage implements OnInit {
     ngOnInit() {
         this.cache.itemExists(environment.apiProductUrl).then((isExist) => {
             if (isExist) {
-                this.cache.getItem(environment.apiProductUrl).then((products) => this.products = products);
+                this.cache.getItem(environment.apiProductUrl)
+                    .then((products) => this.products = products)
+                    .catch(() => this.setAndCache());
             } else {
-                this.subscription.add(
-                    this.productService.getAll()
-                        .subscribe(products => {
-                            this.products = products;
-                            this.cache.saveItem(environment.apiProductUrl, products);
-                        })
-                );
+                this.setAndCache();
             }
         });
 
@@ -47,6 +43,20 @@ export class ProductsPage implements OnInit {
             .subscribe((product) => {
                 this.products.push(product);
             }));
+
     }
 
+    setAndCache(): void {
+        this.subscription.add(
+            this.productService.getAll()
+                .subscribe(products => {
+                    this.products = products;
+                    this.cache.saveItem(environment.apiProductUrl, products);
+                })
+        );
+    }
+
+    ngOnDestroy(): void {
+        this.subscription.unsubscribe();
+    }
 }

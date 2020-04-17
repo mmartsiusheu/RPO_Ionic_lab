@@ -23,15 +23,11 @@ export class CategoriesPage implements OnInit, OnDestroy {
     ngOnInit() {
         this.cache.itemExists(environment.apiCategoryUrl).then((isExist) => {
             if (isExist) {
-                this.cache.getItem(environment.apiCategoryUrl).then((categories) => this.categories = categories);
+                this.cache.getItem(environment.apiCategoryUrl)
+                    .then((categories) => this.categories = categories)
+                    .catch(() => this.setAndCache());
             } else {
-                this.subscription.add(
-                    this.categoryService.getAll()
-                        .subscribe(categories => {
-                            this.categories = categories;
-                            this.cache.saveItem(environment.apiCategoryUrl, categories);
-                        })
-                );
+                this.setAndCache();
             }
         });
 
@@ -50,9 +46,17 @@ export class CategoriesPage implements OnInit, OnDestroy {
 
     }
 
+    setAndCache(): void {
+        this.subscription.add(
+            this.categoryService.getAll()
+                .subscribe(categories => {
+                    this.categories = categories;
+                    this.cache.saveItem(environment.apiCategoryUrl, categories);
+                })
+        );
+    }
+
     ngOnDestroy(): void {
         this.subscription.unsubscribe();
     }
-
-
 }
